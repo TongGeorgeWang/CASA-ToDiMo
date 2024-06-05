@@ -1,5 +1,7 @@
 # CASA-ToDiMo
 
+![CASAToDiMo_logo](https://github.com/TongGeorgeWang/CASA-ToDiMo/assets/160785251/faec1464-9021-42ef-bdf3-c71954510e9a)
+
 **Class Averaging via Spectral Analysis of Totally Disordered Macromolecules (CASA ToDiMo)** <br />
 Finding disordered macromolecules a home in a crowded, chaotic metropolis. <br /> 
 Casa (Spanish - "House/Home/Dwelling") | Todimo (Greek - "Township") <br />
