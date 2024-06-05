@@ -15,7 +15,7 @@ A visual schematic of the method:
 
 
 **Installation** <br />
-This program requires MATLAB (Mathworks), with the Bioinformatics package. It is probably safest to upgrade to the most recent version if possible but it should work with v2019 and above. The program is run in the MATLAB user interface and does not require a terminal. An example conformational ensemble of a mixed sequence single-stranded RNA is provided. 
+This program requires MATLAB (Mathworks), with the Bioinformatics toolbox and Statistics & Machine Learning toolbox. It is probably safest to upgrade to the most recent version of MATLAB if possible but it should work with v2019 and above. The program is run in the MATLAB user interface and does not require a terminal. An example conformational ensemble of a mixed sequence single-stranded RNA is provided. 
 The source code may be downloaded/cloned from the current repository. The general input for the program is a folder, within the source code directory, containing a set of structures in PDB format. 
 Open "classAveragingDisordered.m" in MATLAB - this is the only script that needs to be interacted with. <br />
 
