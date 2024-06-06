@@ -17,6 +17,7 @@ warning('off','all')
 %      2 - Normalized according to Shi and Malik (2000)
 %      3 - Normalized according to Jordan and Weiss (2002)
 %
+%   This script is originated from Ingo Burk, areslp, 2011 (Github)
 %   GW - added automatic determination of # of K-means clusters based on
 %   silhouette maximization 
 %
