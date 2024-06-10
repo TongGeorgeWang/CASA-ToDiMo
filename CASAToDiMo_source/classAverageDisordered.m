@@ -31,12 +31,12 @@ close all
 
 %% User-input variables
 % Variables that commonly need to be changed
-folderName = 'ExamplePool';
+folderName = 'ExamplePool_MixedSequenceSingleStrandedRNA';
 
-rmsdThreshold = 5.5; % Threshold RMSD value to be considered in the same class, in Angstroms; set to 0 for program to determine for you via Okayness maximization
-nKmeans = 0; % Number of clusters to use for final K-means on the node/edge graph; set to 0 and the program will do a search between N_clusters=2-20 and choose N_clusters that maximizes the average silhouette
+rmsdThreshold = 7; % Threshold RMSD value to be considered in the same class, in Angstroms; set to 0 for program to determine for you via Okayness maximization
+nKmeans = 4; % Number of clusters to use for final K-means on the node/edge graph; set to 0 and the program will do a search between N_clusters=2-20 and choose N_clusters that maximizes the average silhouette
 
-species = 'CG'; % Currently supported: either 'RNA', 'PAR', 'protein', or 'CG' (already coarse grained)
+species = 'RNA'; % Currently supported: either 'RNA', 'PAR', 'protein', or 'CG' (already coarse grained)
 
 spatialVarUpperLim = 100; % how high to set the colorbar when visualizing the classed averaged conformers; 100A by default
 
@@ -47,7 +47,8 @@ seq = []; % NOTE: sequence functionality has not been implemented yet. But when 
 %      Leave "sequence = []" if you don't want to plot with sequence info present
 
 
-PARtrueOrder = [1;2;8;9;10;11;12;13;14;15;3;4;5;6;7]; % If species='PAR', need to manually look in the pdb and enter correct subunit order (For some reason the PAR subunit indices get reordered);
+PARtrueOrder = [1;2;13;16;17;18;19;20;21;22;3;4;5;6;7;8;9;10;11;12;14;15];
+%PARtrueOrder = [1;2;8;9;10;11;12;13;14;15;3;4;5;6;7]; % If species='PAR', need to manually look in the pdb and enter correct subunit order (For some reason the PAR subunit indices get reordered);
 % if species is not 'PAR', this variable does not matter.
 
 rmsdThresholdSearchRange = (1:0.1:20); % range of RMSD values that will be tried if rmsdThreshold=0 (in Anstroms); this does not usually need to be changed
@@ -271,10 +272,12 @@ if satisfied == 1
     saveas(gcf,[folderName,'/outputs/SpectralAnalysis.png'])
     
     disp('Writing to log...')
-    fileID = fopen('outputs/log.txt','w');
-    fprintf(fileID,'Spectral clustering result with:\n');
-    fprintf(fileID,['',num2str()]);
-    fclose(fileID);
+    writelines(['3D class averaging on structural ensemble in folder: ',folderName],[folderName,'/outputs/log.txt'])
+    writelines(['Species: ',species],[folderName,'/outputs/log.txt'],WriteMode='append')
+    writelines('Pairwise RMSD values saved in rmsd.txt',[folderName,'/outputs/log.txt'],WriteMode='append')
+    writelines(['Number of conformers: ',num2str(Nstructures)],[folderName,'/outputs/log.txt'],WriteMode='append')
+    writelines(['RMSD threshold for graph calculation: ',num2str(rmsdThreshold)],[folderName,'/outputs/log.txt'],WriteMode='append')
+    writelines(['Number of clusters: ',num2str(nClusters)],[folderName,'/outputs/log.txt'],WriteMode='append')
 
     % Plot class averaged conformers (a new figure window will open)
     disp('The program will now compute the class averaged conformers and display them when done...')

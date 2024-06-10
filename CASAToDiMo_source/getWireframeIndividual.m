@@ -32,9 +32,9 @@ elseif strcmpi(species,'PAR') % Use poly(ADP-ribose) sampling method
     %Reorder
     Ps_x_sorted = Ps_x(PARtrueOrder); Ps_y_sorted = Ps_y(PARtrueOrder); Ps_z_sorted = Ps_z(PARtrueOrder);
 
-    S(:,name) = Ps_x_sorted;
-    S(:,name) = Ps_y_sorted;
-    S(:,name) = Ps_z_sorted;
+    S(:,1) = Ps_x_sorted;
+    S(:,2) = Ps_y_sorted;
+    S(:,3) = Ps_z_sorted;
 
 elseif strcmpi(species,'protein') % For proteins/peptides, sample alpha carbons along backbone
     % Get coordinates of alpha carbons
