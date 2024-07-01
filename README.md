@@ -19,5 +19,6 @@ A visual schematic of the method:
 This program requires MATLAB (Mathworks) v2023 or above, with the Bioinformatics toolbox and Statistics & Machine Learning toolbox. The program is run in the MATLAB user interface and does not require a terminal. An example conformational ensemble of a mixed sequence single-stranded RNA is provided. 
 The source code may be downloaded/cloned from the current repository. The general input for the program is a folder, within the source code directory, containing a set of structures in PDB format. 
 Open "classAveragingDisordered.m" in MATLAB - this is the only script that needs to be interacted with. <br />
+The MATLAB file exchange script 'natsort.m' is used and should be downloaded from the source link and included in the working directory with the other functions from the current repository. (https://www.mathworks.com/matlabcentral/fileexchange/34464-customizable-natural-order-sort | Stephen Cobeldick) <br />
 
 **Please see the 'DetailedInstructions' file for information on how to run the program.**
