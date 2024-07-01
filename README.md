@@ -3,7 +3,7 @@
 ![CASAToDiMo_logo](https://github.com/TongGeorgeWang/CASA-ToDiMo/assets/160785251/faec1464-9021-42ef-bdf3-c71954510e9a)
 
 Finding disordered macromolecules a home in a crowded, chaotic metropolis. <br /> 
-Casa (Spanish - "House/Home/Dwelling") | Todimo (Greek - "Township") <br />
+Casa (Spanish - "House/Home/Dwelling") | Todimo (Greek - "the township/municipality") <br />
 
 **Background and applications** <br />
 Class averaging is a technique originally implemented for single-particle cryo electron microscopy (EM) image processing, wherein 2D EM images of a macromolecule in different orientations are aligned and separated into categories (classes) based on visual similarity. Images are subseqently averaged within the classes to reconstruct a model of the macromolecule, commonly to high spatial resolution. Cryo-EM class averaging has usually been applied on proteins that are highly structured or that have short, flexible subregions. CASA-ToDiMo utilizes spectral clustering, a large-dataset reduction technique rooted in graph theory, to class average macromolecules in 3D space. While it works with structured or partially structured macromolecules, it thrives on disordered biopolymers with zero secondary or tertiary structure, which are represented with a broad conformational ensemble. The program can work with a pool of nucleic acid, protein, or coarse-grained bead structures in PDB format. <br />
