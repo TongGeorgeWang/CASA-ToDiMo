@@ -18,7 +18,6 @@ D = sparse(1:size(AdjacencyMatrix, 1), 1:size(AdjacencyMatrix,2), degrees);
 L = D - AdjacencyMatrix; 
 D = spdiags(1./(degrees.^0.5), 0, size(D, 1), size(D, 2)); 
 L = D * L * D;
-%degrees(degrees == 0) = eps; 
 
 
 %% Compute nKmeans smallest eigenvectors and perform K-means
@@ -26,12 +25,10 @@ L = D * L * D;
 diff  = eps;
 if nKmeans ~= 0        
     [V, eigenvalues] = eigs(L, nKmeans, diff);
-    %eigenvalues = diag(eigenvalues);
     V = bsxfun(@rdivide, V, sqrt(sum(V.^2, 2))); %normalize eigenvectors
 
-    % C: n-by-1 matrix containing the cluster number for each data point, minus 1 for the consistant with the true label
-    C = kmeans(V, nKmeans, 'start', 'cluster') - 1;
-    %C = sparse(1:size(D, 1), C, 1); % now convert C to a n-by-k matrix containing the k indicator vectors as columns
+    C = kmeans(V, nKmeans, 'start', 'cluster') - 1; %n-by-1 matrix containing the cluster number for each data point, minus 1 for the consistant with the true label
+    %C = sparse(1:size(D, 1), C, 1); 
 
 
 elseif nKmeans == 0 % Determine optimal number of clusters by maximizing the average silhouette
