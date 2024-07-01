@@ -104,7 +104,7 @@ end
 
 %% Perform spectral clustering on connectivity matrix; plot graph
 
-[C, L, U, value] = SpectralClustering(RMSD_binary, nKmeans, 3);
+C = SpecClust(RMSD_binary, nKmeans);
 clusters = [1:Nstructures; C']';
 clusters = sortrows(clusters,2);
 

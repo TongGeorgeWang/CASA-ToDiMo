@@ -15,7 +15,7 @@ function [files_grouped, nClusters, clusterPDBnumbers] = GroupClusters(folderNam
 
 files = dir( fullfile(folderName,'*.pdb') );
 files = {files.name}';
-files = natsort(files); % Sort filenames in numerical order
+%files = natsort(files); % Sort filenames in numerical order; this line requires an external script so I just disabled it, it's mostly just organizational
 
 
 %% Do the file copying 

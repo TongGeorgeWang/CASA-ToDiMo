@@ -106,7 +106,7 @@ end
     colormap(pink)
     set(gca,'ColorScale','log')
 
-saveas(gcf,[folderName,'/outputs/ClassAveragedEnsemble.png'])
+saveas(gcf,[folderName,'/outputs/ClassAveragedEnsemble.fig'])
 
 
 %% Isolate the mean backbone plot and include sequence information 
