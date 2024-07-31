@@ -12,8 +12,8 @@ Class averaging is a technique originally implemented for single-particle cryo e
 The program first performs a spatial alignment of all pairs of structures in the ensemble by minimizing the root mean square deviation (RMSD). The pairwise minimum RMSD values that result from this alignment are then tabulated into a matrix. An RMSD threshold is set in this matrix wherein pairs of structures with an RMSD value below this threshold are considered "connected". The thresholded pairwise RMSD matrix is effectively binarized, and serves as an adjacency matrix with which we may construct a network graph where nodes represent structures in the ensemble and edges are present between two connected structures. The graph is then spectrally clustered following the algorighm of Ng, Jordan, Weiss (NIPS, 2001) to identify unique classes of conformations. The macromolecule backbone is then coarse grained at each monomer (ie for proteins, the position of each alpha carbon is sampled; for RNA, the position of each backbone phosphorus is sampled). Coarse grained conformers within each class are then averaged at every monomer position to generate a characteristic conformer of that class. The variance in this averaging is taken as a metric of variability at every monomer position. <br />
 A visual schematic of the method: 
 
-![CASAToDiMo_schematic](![Box1](https://github.com/user-attachments/assets/643f4aa3-7d63-4451-befd-ba20e469c606)
-)
+![Box1](https://github.com/user-attachments/assets/0d409b59-fb0f-4751-99be-ff3c6c678167)
+
 
 
 **Installation** <br />
