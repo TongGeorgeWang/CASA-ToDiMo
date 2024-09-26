@@ -1,4 +1,4 @@
-function varargout = plotWireframeMeanVar(S_allX,S_allY,S_allZ)
+function varMetricS = plotWireframeMeanVar(S_allX,S_allY,S_allZ)
 %Average wireframe positions at each index and plot class averaged
 %conformer models, showing spatial variance as a variability metric
 %   Prior to calling this function, ensure that the right axes are

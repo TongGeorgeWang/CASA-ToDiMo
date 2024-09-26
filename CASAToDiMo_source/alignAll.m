@@ -11,9 +11,14 @@ function [rmsdMatrix] = alignAll(folderName)
 
 files = dir( fullfile(folderName,'*.pdb') );
 files = {files.name}';
-files = natsort(files); % Sort filenames in numerical order
+%files = natsort(files); % Sort filenames in numerical order
 output = fopen([folderName,'/rmsd.txt'], 'wt');
 rmsds = zeros([numel(files),numel(files)]);
+
+% Read pdbs first before executing main loop 
+for i = 1:numel(files)
+     pdbArray{i} = pdbread([folderName,'/',files{i}]);
+end
 
 for i = 1:numel(files)
     %print(["alignment template: structure",num2str(i)])
@@ -25,8 +30,8 @@ for i = 1:numel(files)
             rmsds(i,j) = 0;
 
         else
-            pdb1 = pdbread([folderName,'/',files{i}]);
-            pdb2 = pdbread([folderName,'/',files{j}]);
+            pdb1 = pdbArray{i};
+            pdb2 = pdbArray{j}; 
 
             if isfield(pdb1,'Sequence') == 1 % PDB likely a traditional protein pdb
                 [DIST,RMSD,TRANSF,PDB2TX] = pdbsuperpose(pdb1,pdb2);

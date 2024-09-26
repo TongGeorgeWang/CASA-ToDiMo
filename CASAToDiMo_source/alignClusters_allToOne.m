@@ -1,4 +1,4 @@
-function alignClusters(folderName,files_grouped,nClusters,clusterPDBnumbers)
+function alignClusters_allToOne(folderName,files_grouped,nClusters,clusterPDBnumbers)
 %% Align PDBs within a spectral cluster, and record all pairwise RMSD values
 %   Adapted from alignAll.pml, originally written in Python for use in PyMol
 %      MATLAB 2023 has 'pdbsuperpose' function, which should be similar to

@@ -84,11 +84,13 @@ for clust = 0:(nClusters-1)
     %% Plot backbone positions of all samples (averaged)
     
     % First plot this for the figure that will be saved for each individual cluster 
-    plotWireframeMeanVar(S_allX,S_allY,S_allZ)
+    varMetricS = plotWireframeMeanVar(S_allX,S_allY,S_allZ);
+    %spatialVarUpperLim = max(varMetricS);
     a = colorbar; a.Label.String = 'Spatial variance (Angstroms)'; a.Label.FontSize = 15;
-    clim([0 100])
+    clim([0 spatialVarUpperLim])
     colormap(pink)
-    set(gca,'ColorScale','log')
+    %set(gca,'ColorScale','log')
+    set(gcf,'Color',[0.7 0.7 0.7])
     saveas(gca,[folderName,'/outputs/models/cluster',num2str(clust),'_wireframe.fig'])
     close %Close the figure once it's saved
     
@@ -96,15 +98,16 @@ for clust = 0:(nClusters-1)
     nexttile([2 1])
     hold all
     title(['Cluster ',num2str(clust),'; # of structures = ',num2str(nStructures)],'Color',colorsSpaced(clust+1,:))
-    plotWireframeMeanVar(S_allX,S_allY,S_allZ)
+    varMetricS = plotWireframeMeanVar(S_allX,S_allY,S_allZ);
+    clim([0 spatialVarUpperLim])
 
     clear S_allX S_allY S_allZ %These will change in size depending on number of structures in each cluster
 end
 
     a = colorbar; a.Label.String = 'Spatial variance (Angstroms)'; a.Label.FontSize = 15;
-    clim([0 spatialVarUpperLim])
+    %clim([0 spatialVarUpperLim])
     colormap(pink)
-    set(gca,'ColorScale','log')
+    %set(gca,'ColorScale','log')
 
 saveas(gcf,[folderName,'/outputs/ClassAveragedEnsemble.fig'])
 

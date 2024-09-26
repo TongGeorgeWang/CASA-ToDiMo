@@ -27,7 +27,7 @@ if nKmeans ~= 0
     [V, eigenvalues] = eigs(L, nKmeans, diff);
     V = bsxfun(@rdivide, V, sqrt(sum(V.^2, 2))); %normalize eigenvectors
 
-    C = kmeans(V, nKmeans, 'start', 'cluster') - 1; %n-by-1 matrix containing the cluster number for each data point, minus 1 for the consistant with the true label
+    C = kmeans(V, nKmeans) - 1; %n-by-1 matrix containing the cluster number for each data point, minus 1 for the consistant with the true label
     %C = sparse(1:size(D, 1), C, 1); 
 
 
@@ -39,10 +39,10 @@ elseif nKmeans == 0 % Determine optimal number of clusters by maximizing the ave
         for nKmeans = kRange
             
             % Compute U as normal 
-            V = eigs(L, nKmeans, diff);
+            [V, eigenvalues] = eigs(L, nKmeans, diff);
             V = bsxfun(@rdivide, V, sqrt(sum(V.^2, 2)));
 
-            C_vary{N,nKmeans-1} = kmeans(V, nKmeans, 'start', 'cluster') - 1;
+            C_vary{N,nKmeans-1} = kmeans(V, nKmeans) - 1;
 
             % Compute silhouette metric, which we aim to maximize 
             s{N,nKmeans-1} = silhouette(V,C_vary{N,nKmeans-1});

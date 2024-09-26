@@ -33,7 +33,7 @@ close all
 % Variables that commonly need to be changed
 folderName = 'ExamplePool_MixedSequenceSingleStrandedRNA';
 
-rmsdThreshold = 7; % Threshold RMSD value to be considered in the same class, in Angstroms; set to 0 for program to determine for you via Okayness maximization
+rmsdThreshold = 9.5; % Threshold RMSD value to be considered in the same class, in Angstroms; set to 0 for program to determine for you via Okayness maximization
 nKmeans = 4; % Number of clusters to use for final K-means on the node/edge graph; set to 0 and the program will do a search between N_clusters=2-20 and choose N_clusters that maximizes the average silhouette
 
 species = 'RNA'; % Currently supported: either 'RNA', 'PAR', 'protein', or 'CG' (already coarse grained)
@@ -69,15 +69,22 @@ tiledlayout(4,4)
 %% Perform initial alignment and pairwise RMSD calculations
 
 disp(' ')
-if exist([folderName,'/','rmsd.txt'],'file') ~= 0 % Don't do again if RMSDs already computed
+if exist([folderName,'/','rmsdMatrix.mat'],'file') ~= 0 % Don't do again if RMSDs already computed
     disp('Loading previously computed pairwise RMSDs...')
-    RMSD_load = readmatrix([folderName,'/rmsd.txt']);
-    rmsdMatrix = RMSD_load(:,2);
+    load([folderName,'/','rmsdMatrix.mat'])
     Nstructures = sqrt(numel(rmsdMatrix));
-    rmsdMatrix = reshape(rmsdMatrix,[Nstructures, Nstructures]);
+    %rmsdMatrix = reshape(rmsdMatrix,[Nstructures, Nstructures]);
 else
     disp('Computing RMSDs between each pair of structures after alignment... This may take a while.')
-    rmsdMatrix = alignAll(folderName);
+
+    packages = ver().Name; % Check if Parallel toolbox is installed; if so do it the faster way
+    if max(strcmpi(packages,'Parallel Computing Toolbox')) == 1
+        rmsdMatrix = alignAll_parallel(folderName);
+    else
+        rmsdMatrix = alignAll(folderName);
+    end
+
+    save([folderName,'/rmsdMatrix'],'rmsdMatrix') % save for future reruns
     Nstructures = sqrt(numel(rmsdMatrix));
 end
 disp('Done.')
@@ -85,7 +92,7 @@ disp('Done.')
 
 %% Automatically determine RMSD threshold if desired, based on okayness metric
 if rmsdThreshold == 0
-    rmsdThreshold = determineRMSDthresh(folderName,Nstructures,rmsdThresholdSearchRange);
+    rmsdThreshold = determineRMSDthresh(Nstructures,rmsdThresholdSearchRange,rmsdMatrix);
 end
 
 
@@ -183,7 +190,7 @@ end
 histRed = histRed - 1; % subtract diagonals (same structures)
 histBlue = histBlue + 1; % add one starting state
 fracHistRed = histRed ./ Nstructures;
-fracHistBlue = histBlue ./ Nstructures;
+fracHistBlue = histBlue ./ Nstructures; 
 
 kB = 1.380649E-23; % Boltzmann constant, in J/K
 W = floor(numBlue/2); % Assume two structures occupy different microstates if they are disconnected
@@ -270,7 +277,7 @@ if satisfied == 1
     end
     save([folderName,'/outputs/KmeansClusters.mat'],'clusters')
     saveas(gcf,[folderName,'/outputs/SpectralAnalysis.png'])
-    
+
     disp('Writing to log...')
     writelines(['3D class averaging on structural ensemble in folder: ',folderName],[folderName,'/outputs/log.txt'])
     writelines(['Species: ',species],[folderName,'/outputs/log.txt'],WriteMode='append')

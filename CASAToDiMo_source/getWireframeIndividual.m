@@ -1,8 +1,10 @@
 function [S] = getWireframeIndividual(pdb,species,PARtrueOrder)
 %Coarse grain macromolecules by sampling positions of key atoms.
 
-for i = 1:pdb(1,end).AtomSerNo
-    atomNames{i} = pdb(1,i).AtomName;
+if ~strcmpi(species,'CG') % get names of atoms if the model is not CG
+    for i = 1:pdb(1,end).AtomSerNo
+        atomNames{i} = pdb(1,i).AtomName;
+    end
 end
 
 %%
@@ -50,16 +52,19 @@ elseif strcmpi(species,'protein') % For proteins/peptides, sample alpha carbons 
     S(:,3) = Ps_z;
 
 elseif strcmpi(species,'CG') % Models already coarse grained, simply sample every atom
-    for i = 1:pdb(1,end).AtomSerNo
-        atoms_x(i,1) = pdb(1,i).X;
-        atoms_y(i,1) = pdb(1,i).Y;
-        atoms_z(i,1) = pdb(1,i).Z;
-    end
+    % for i = 1:numel(pdb)
+    %     atoms_x(i,1) = pdb.X;
+    %     atoms_y(i,1) = pdb.Y;
+    %     atoms_z(i,1) = pdb.Z;
+    % end
+    % 
+    % S(:,1) = atoms_x;
+    % S(:,2) = atoms_y;
+    % S(:,3) = atoms_z;
 
-    S(:,1) = atoms_x;
-    S(:,2) = atoms_y;
-    S(:,3) = atoms_z;
-
+    S(:,1) = [pdb.X]';
+    S(:,2) = [pdb.Y]';
+    S(:,3) = [pdb.Z]';
 end
 
 

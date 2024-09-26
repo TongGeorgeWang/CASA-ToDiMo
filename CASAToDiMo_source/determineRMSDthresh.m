@@ -1,4 +1,4 @@
-function rmsd_threshold = determineRMSDthresh(folderName, Nstructures, rmsdThresholdSearchRange)
+function rmsd_threshold = determineRMSDthresh(Nstructures, rmsdThresholdSearchRange,RMSD)
 
 %% Assign structures within an ensemble to unique classes based on nearest-neighbor RMSD minimization 
 %   This workflow requires you to first generate RMSD values of all possible pairwise alignments
@@ -12,9 +12,10 @@ function rmsd_threshold = determineRMSDthresh(folderName, Nstructures, rmsdThres
 
 
 %% Load RMSDs and set up pairwise RMSD matrix 
-RMSD_load = readmatrix([folderName,'/rmsd.txt']);
-RMSD = RMSD_load(:,2);
-RMSD = reshape(RMSD,[Nstructures, Nstructures]);
+%RMSD_load = readmatrix([folderName,'/rmsd.txt']);
+%RMSD = RMSD_load(:,2);
+%RMSD = reshape(RMSD,[Nstructures, Nstructures]);
+
 
 for k = 1:numel(rmsdThresholdSearchRange)
 
