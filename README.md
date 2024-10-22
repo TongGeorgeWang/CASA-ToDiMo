@@ -5,7 +5,7 @@
 Finding disordered macromolecules a home in a crowded, chaotic metropolis. <br /> 
 Casa (Spanish - "House/Home/Dwelling") | Todimo (Greek, transliterated - "The Township/Municipality") <br />
 
-Please cite: <br />
+If you use this code please cite: <br />
 **Tong Wang, Kush Coshic, Mohsen Badiee, Maranda R. McDonald, Aleksei Aksimentiev, Lois Pollack, Anthony K. L. Leung, Cation-induced intramolecular coil-to-globule transition in poly(ADP-ribose). Nat Comm, 15(7901), 2024.** <br />
 https://www.nature.com/articles/s41467-024-51972-9 <br />
 
